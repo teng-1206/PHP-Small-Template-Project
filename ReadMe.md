@@ -10,6 +10,7 @@
       3. img - Store all the images.
       4. js - Store all the js files.
       5. modules - Store all the PHP class files.
+      6. vendor - Store all the plugins and additional resources.
    3. templates - Store all the components.
       1. header.php - Header for this project.
       2. footer.php - Footer for this project.

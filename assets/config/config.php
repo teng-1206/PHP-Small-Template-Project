@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     $config = array(
         "db" => array(
             "db1" => array(
@@ -16,7 +18,14 @@
             )
         ),
         "urls" => array(
-            "baseUrl" => "http://example.com"
+            "base" => "http://example.com"
+        ),
+        "localhost_urls" => array(
+            "base" => "https://localhost/FOLDER_NAME/",            
+            "css" => "https://localhost/FOLDER_NAME/assets/library/css/",
+            "js" => "https://localhost/FOLDER_NAME/assets/library/js/",
+            "vendor" => "https://localhost/FOLDER_NAME/assets/library/vendor/",
+            "img" => "https://localhost/FOLDER_NAME/assets/library/img/",
         ),
         "paths" => array(
             "resources" => "/path/to/assets",
@@ -27,9 +36,7 @@
         )
     );
 
-    /**
-     * * Database Connection
-     */
+    // * Database Connection
     include_once("conn.php");
     
     /**
