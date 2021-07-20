@@ -21,11 +21,18 @@
             "base" => "http://example.com"
         ),
         "localhost_urls" => array(
-            "base" => "https://localhost/FOLDER_NAME/",            
-            "css" => "https://localhost/FOLDER_NAME/assets/library/css/",
-            "js" => "https://localhost/FOLDER_NAME/assets/library/js/",
-            "vendor" => "https://localhost/FOLDER_NAME/assets/library/vendor/",
-            "img" => "https://localhost/FOLDER_NAME/assets/library/img/",
+            "base" => "https://localhost/FOLDER_NAME/",
+            "api" => "https://localhost/FOLDER_NAME/assets/api/",
+            "config" => "https://localhost/FOLDER_NAME/assets/config/",
+            "css" => "https://localhost/FOLDER_NAME/assets/css/",
+            "docs" => "https://localhost/FOLDER_NAME/assets/docs/",
+            "img" => "https://localhost/FOLDER_NAME/assets/img/",
+            "js" => "https://localhost/FOLDER_NAME/assets/js/",
+            "modules" => "https://localhost/FOLDER_NAME/assets/modules/",
+            "plugins" => "https://localhost/FOLDER_NAME/assets/plugins/",
+            "templates" => "https://localhost/FOLDER_NAME/assets/templates/",
+            "uploads" => "https://localhost/FOLDER_NAME/assets/uploads/",
+            
         ),
         "paths" => array(
             "resources" => "/path/to/assets",
@@ -36,33 +43,39 @@
         )
     );
 
-    // * Database Connection
     include_once("conn.php");
-    
-    /**
-     * Creating constants for heavily used paths makes things a lot easier.
-     * ex. require_once(LIBRARY_PATH . "Paginator.php")
-     */
           
-    defined("LIBRARY_PATH")
-        or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/../library'));
+    defined("ASSETS_PATH")
+        or define("ASSETS_PATH", realpath(dirname(__FILE__) . '/..//'));
         
-    defined("TEMPLATES_PATH")
-        or define("TEMPLATES_PATH", realpath(dirname(__FILE__) . '/../templates'));
+    defined("API_PATH")
+        or define("API_PATH", ASSETS_PATH . '/api');
+
+    defined("CONFIG_PATH")
+        or define("CONFIG_PATH", ASSETS_PATH . '/config');
 
     defined("CSS_PATH")
-        or define("CSS_PATH", LIBRARY_PATH . '/css');
+        or define("CSS_PATH", ASSETS_PATH . '/css');
 
     defined("DOCS_PATH")
-        or define("DOCS_PATH", LIBRARY_PATH . '/docs');
+        or define("DOCS_PATH", ASSETS_PATH . '/docs');
         
     defined("IMG_PATH")
-        or define("IMG_PATH", LIBRARY_PATH . '/img');
+        or define("IMG_PATH", ASSETS_PATH . '/img');
 
     defined("JS_PATH")
-        or define("JS_PATH", LIBRARY_PATH . '/js');
+        or define("JS_PATH", ASSETS_PATH . '/js');
 
     defined("MODULES_PATH")
-        or define("MODULES_PATH", LIBRARY_PATH . '/modules');
+        or define("MODULES_PATH", ASSETS_PATH . '/modules');
+
+    defined("PLUGINS_PATH")
+        or define("PLUGINS_PATH", ASSETS_PATH . '/plugins');   
+    
+    defined("TEMPLATES_PATH")
+        or define("TEMPLATES_PATH", ASSETS_PATH . '/templates');
+
+    defined("UPLOADS_PATH")
+        or define("UPLOADS_PATH", ASSETS_PATH . '/uploads');
      
 ?>
