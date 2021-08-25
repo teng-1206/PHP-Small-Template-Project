@@ -1,7 +1,5 @@
 <?php
 
-    session_start();
-
     $config = array(
         "db" => array(
             "db1" => array(
@@ -21,17 +19,17 @@
             "base" => "http://example.com"
         ),
         "localhost_urls" => array(
-            "base" => "https://localhost/FOLDER_NAME/",
-            "api" => "https://localhost/FOLDER_NAME/assets/api/",
-            "config" => "https://localhost/FOLDER_NAME/assets/config/",
-            "css" => "https://localhost/FOLDER_NAME/assets/css/",
-            "docs" => "https://localhost/FOLDER_NAME/assets/docs/",
-            "img" => "https://localhost/FOLDER_NAME/assets/img/",
-            "js" => "https://localhost/FOLDER_NAME/assets/js/",
-            "modules" => "https://localhost/FOLDER_NAME/assets/modules/",
-            "plugins" => "https://localhost/FOLDER_NAME/assets/plugins/",
-            "templates" => "https://localhost/FOLDER_NAME/assets/templates/",
-            "uploads" => "https://localhost/FOLDER_NAME/assets/uploads/",
+            "base" => "http://localhost/FOLDER_NAME/",
+            "api" => "http://localhost/FOLDER_NAME/assets/api/",
+            "config" => "http://localhost/FOLDER_NAME/assets/config/",
+            "css" => "http://localhost/FOLDER_NAME/assets/css/",
+            "docs" => "http://localhost/FOLDER_NAME/assets/docs/",
+            "img" => "http://localhost/FOLDER_NAME/assets/img/",
+            "js" => "http://localhost/FOLDER_NAME/assets/js/",
+            "modules" => "http://localhost/FOLDER_NAME/assets/modules/",
+            "plugins" => "http://localhost/FOLDER_NAME/assets/plugins/",
+            "templates" => "http://localhost/FOLDER_NAME/assets/templates/",
+            "uploads" => "http://localhost/FOLDER_NAME/assets/uploads/",
             
         ),
         "paths" => array(
@@ -44,7 +42,7 @@
     );
 
     include_once("conn.php");
-          
+
     defined("ASSETS_PATH")
         or define("ASSETS_PATH", realpath(dirname(__FILE__) . '/..//'));
         
@@ -77,5 +75,7 @@
 
     defined("UPLOADS_PATH")
         or define("UPLOADS_PATH", ASSETS_PATH . '/uploads');
-     
+
+    session_start();
+
 ?>
