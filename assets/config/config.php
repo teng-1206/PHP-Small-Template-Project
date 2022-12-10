@@ -11,75 +11,74 @@
     $config = array(
         "db" => array(
             "db1" => array(
-                "dbname" => "database1",
+                "dbname"   => "database1",
                 "username" => "dbUser",
                 "password" => "pa$$",
-                "host" => "localhost"
+                "host"     => "localhost"
             ),
             "db2" => array(
-                "dbname" => "database2",
+                "dbname"   => "database2",
                 "username" => "dbUser",
                 "password" => "pa$$",
-                "host" => "localhost"
+                "host"     => "localhost"
             )
         ),
         "urls" => array(
-            "base" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/",
-            "api" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/api/",
-            "config" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/config/",
-            "css" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/css/",
-            "docs" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/docs/",
-            "img" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/img/",
-            "js" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/js/",
-            "modules" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/modules/",
-            "plugins" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/plugins/",
-            "templates" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/templates/",
-            "uploads" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/uploads/",
+            "base"      => "https://" . DOMAIN_NAME . "/FOLDER_NAME/",
+            "api"       => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/api/",
+            "config"    => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/config/",
+            "css"       => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/css/",
+            "docs"      => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/docs/",
+            "img"       => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/img/",
+            "js"        => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/js/",
+            "modules"   => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/modules/",
+            "plugins"   => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/plugins/",
+            "templates" => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/templates/",
+            "uploads"   => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/uploads/",
         ),
         "paths" => array(
             "resources" => "/path/to/assets",
             "images" => array(
-                "content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
-                "layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
+                "content" => $_SERVER[ 'DOCUMENT_ROOT' ] . "/images/content",
+                "layout"  => $_SERVER[ 'DOCUMENT_ROOT' ] . "/images/layout"
             )
         )
     );
 
-    include_once("conn.php");
+    include_once( 'conn.php' );
 
-    defined("ASSETS_PATH")
-        or define("ASSETS_PATH", realpath(dirname(__FILE__) . '/..//'));
+    defined( 'ASSETS_PATH' )
+        or define( 'ASSETS_PATH', realpath( dirname( __FILE__ ) . '//..//' ) );
         
-    defined("API_PATH")
-        or define("API_PATH", ASSETS_PATH . '/api');
+    defined( 'API_PATH' )
+        or define( 'API_PATH', ASSETS_PATH . '//api' );
 
-    defined("CONFIG_PATH")
-        or define("CONFIG_PATH", ASSETS_PATH . '/config');
+    defined( 'CONFIG_PATH' )
+        or define( 'CONFIG_PATH', ASSETS_PATH . '//config' );
 
-    defined("CSS_PATH")
-        or define("CSS_PATH", ASSETS_PATH . '/css');
+    defined( 'CSS_PATH' )
+        or define( 'CSS_PATH', ASSETS_PATH . '//css' );
 
-    defined("DOCS_PATH")
-        or define("DOCS_PATH", ASSETS_PATH . '/docs');
+    defined( 'DOCS_PATH' )
+        or define( 'DOCS_PATH', ASSETS_PATH . '//docs' );
         
-    defined("IMG_PATH")
-        or define("IMG_PATH", ASSETS_PATH . '/img');
+    defined( 'IMG_PATH' )
+        or define( 'IMG_PATH', ASSETS_PATH . '//img' );
 
-    defined("JS_PATH")
-        or define("JS_PATH", ASSETS_PATH . '/js');
+    defined( 'JS_PATH' )
+        or define( 'JS_PATH', ASSETS_PATH . '//js' );
 
-    defined("MODULES_PATH")
-        or define("MODULES_PATH", ASSETS_PATH . '/modules');
+    defined( 'MODULES_PATH' )
+        or define( 'MODULES_PATH', ASSETS_PATH . '//modules' );
 
-    defined("PLUGINS_PATH")
-        or define("PLUGINS_PATH", ASSETS_PATH . '/plugins');   
+    defined( 'PLUGINS_PATH' )
+        or define( 'PLUGINS_PATH', ASSETS_PATH . '//plugins' );   
     
-    defined("TEMPLATES_PATH")
-        or define("TEMPLATES_PATH", ASSETS_PATH . '/templates');
+    defined( 'TEMPLATES_PATH' )
+        or define( 'TEMPLATES_PATH', ASSETS_PATH . '//templates' );
 
-    defined("UPLOADS_PATH")
-        or define("UPLOADS_PATH", ASSETS_PATH . '/uploads');
+    defined( 'UPLOADS_PATH' )
+        or define( 'UPLOADS_PATH', ASSETS_PATH . '//uploads' );
 
     session_start();
-
 ?>
