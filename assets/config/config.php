@@ -1,5 +1,13 @@
 <?php
 
+    // ! Sandbox
+    defined( 'DOMAIN_NAME' )
+        or define( 'DOMAIN_NAME', 'localhost' );
+
+    // ! Production
+    // defined( 'DOMAIN_NAME' )
+    //     or define( 'DOMAIN_NAME', '' );
+
     $config = array(
         "db" => array(
             "db1" => array(
@@ -16,21 +24,17 @@
             )
         ),
         "urls" => array(
-            "base" => "http://example.com"
-        ),
-        "localhost_urls" => array(
-            "base" => "http://localhost/FOLDER_NAME/",
-            "api" => "http://localhost/FOLDER_NAME/assets/api/",
-            "config" => "http://localhost/FOLDER_NAME/assets/config/",
-            "css" => "http://localhost/FOLDER_NAME/assets/css/",
-            "docs" => "http://localhost/FOLDER_NAME/assets/docs/",
-            "img" => "http://localhost/FOLDER_NAME/assets/img/",
-            "js" => "http://localhost/FOLDER_NAME/assets/js/",
-            "modules" => "http://localhost/FOLDER_NAME/assets/modules/",
-            "plugins" => "http://localhost/FOLDER_NAME/assets/plugins/",
-            "templates" => "http://localhost/FOLDER_NAME/assets/templates/",
-            "uploads" => "http://localhost/FOLDER_NAME/assets/uploads/",
-            
+            "base" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/",
+            "api" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/api/",
+            "config" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/config/",
+            "css" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/css/",
+            "docs" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/docs/",
+            "img" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/img/",
+            "js" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/js/",
+            "modules" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/modules/",
+            "plugins" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/plugins/",
+            "templates" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/templates/",
+            "uploads" => "http://" . DOMAIN_NAME . "/FOLDER_NAME/assets/uploads/",
         ),
         "paths" => array(
             "resources" => "/path/to/assets",
