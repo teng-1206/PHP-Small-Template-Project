@@ -1,84 +1,78 @@
 <?php
+/**
+ * Global Configuration File
+ * 
+ * This file handles environment variable loading, path definitions,
+ * and database credentials using global constants.
+ */
 
-    // ! Sandbox
-    defined( 'DOMAIN_NAME' )
-        or define( 'DOMAIN_NAME', 'localhost' );
+// --- 1. SETTINGS & PATHS ---
+// Define the absolute path to the root of the project
+define('BASE_PATH', realpath(__DIR__ . '/../../'));
 
-    // ! Production
-    // defined( 'DOMAIN_NAME' )
-    //     or define( 'DOMAIN_NAME', '' );
-
-    $config = array(
-        "db" => array(
-            "db1" => array(
-                "dbname"   => "database1",
-                "username" => "dbUser",
-                "password" => "pa$$",
-                "host"     => "localhost"
-            ),
-            "db2" => array(
-                "dbname"   => "database2",
-                "username" => "dbUser",
-                "password" => "pa$$",
-                "host"     => "localhost"
-            )
-        ),
-        "urls" => array(
-            "base"      => "https://" . DOMAIN_NAME . "/FOLDER_NAME/",
-            "api"       => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/api/",
-            "config"    => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/config/",
-            "css"       => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/css/",
-            "docs"      => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/docs/",
-            "img"       => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/img/",
-            "js"        => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/js/",
-            "modules"   => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/modules/",
-            "plugins"   => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/plugins/",
-            "templates" => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/templates/",
-            "uploads"   => "https://" . DOMAIN_NAME . "/FOLDER_NAME/assets/uploads/",
-        ),
-        "paths" => array(
-            "resources" => "/path/to/assets",
-            "images" => array(
-                "content" => $_SERVER[ 'DOCUMENT_ROOT' ] . "/images/content",
-                "layout"  => $_SERVER[ 'DOCUMENT_ROOT' ] . "/images/layout"
-            )
-        )
-    );
-
-    include_once( 'conn.php' );
-
-    defined( 'ASSETS_PATH' )
-        or define( 'ASSETS_PATH', realpath( dirname( __FILE__ ) . '//..//' ) );
+// --- 2. .ENV PARSER ---
+// Load environment variables from the .env file if it exists
+$envFile = BASE_PATH . '/.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        // Skip comments
+        if (strpos(trim($line), '#') === 0) continue;
         
-    defined( 'API_PATH' )
-        or define( 'API_PATH', ASSETS_PATH . '//api//' );
-
-    defined( 'CONFIG_PATH' )
-        or define( 'CONFIG_PATH', ASSETS_PATH . '//config//' );
-
-    defined( 'CSS_PATH' )
-        or define( 'CSS_PATH', ASSETS_PATH . '//css//' );
-
-    defined( 'DOCS_PATH' )
-        or define( 'DOCS_PATH', ASSETS_PATH . '//docs//' );
+        // Parse Name=Value pairs
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value);
         
-    defined( 'IMG_PATH' )
-        or define( 'IMG_PATH', ASSETS_PATH . '//img//' );
+        // Set environment variables if not already set
+        if (!getenv($name)) {
+            putenv("$name=$value");
+        }
+    }
+}
 
-    defined( 'JS_PATH' )
-        or define( 'JS_PATH', ASSETS_PATH . '//js//' );
+// --- 3. CORE CONSTANTS ---
+// Database Credentials
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_NAME', getenv('DB_NAME') ?: 'database1');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '');
 
-    defined( 'MODULES_PATH' )
-        or define( 'MODULES_PATH', ASSETS_PATH . '//modules//' );
+// Application Info
+define('APP_NAME',   getenv('APP_NAME') ?: 'PHP Template');
+define('APP_ENV',    getenv('APP_ENV')  ?: 'production');
+define('APP_DOMAIN', getenv('APP_DOMAIN') ?: 'localhost');
+define('APP_FOLDER', getenv('APP_FOLDER') ?: '');
 
-    defined( 'PLUGINS_PATH' )
-        or define( 'PLUGINS_PATH', ASSETS_PATH . '//plugins//' );
-    
-    defined( 'TEMPLATES_PATH' )
-        or define( 'TEMPLATES_PATH', ASSETS_PATH . '//templates//' );
+// --- 4. URL GENERATION ---
+// Automatically build the base URL
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+$baseUrl  = $protocol . APP_DOMAIN . '/' . (APP_FOLDER ? APP_FOLDER . '/' : '');
+define('BASE_URL', $baseUrl);
 
-    defined( 'UPLOADS_PATH' )
-        or define( 'UPLOADS_PATH', ASSETS_PATH . '//uploads//' );
+// Asset URLs
+define('URL_ASSETS',    BASE_URL . 'assets/');
+define('URL_API',       URL_ASSETS . 'api/');
+define('URL_CSS',       URL_ASSETS . 'css/');
+define('URL_IMG',       URL_ASSETS . 'img/');
+define('URL_JS',        URL_ASSETS . 'js/');
+define('URL_PLUGINS',   URL_ASSETS . 'plugins/');
+define('URL_UPLOADS',   URL_ASSETS . 'uploads/');
 
+// --- 5. PATH DEFINITIONS ---
+// Server Paths for includes
+define('PATH_ASSETS',    BASE_PATH . '/assets');
+define('PATH_API',       PATH_ASSETS . '/api');
+define('PATH_CONFIG',    PATH_ASSETS . '/config');
+define('PATH_MODULES',   PATH_ASSETS . '/modules');
+define('PATH_TEMPLATES', PATH_ASSETS . '/templates');
+
+// --- 6. INITIALIZATION ---
+// Include database connection
+include_once(PATH_CONFIG . '/conn.php');
+
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
 ?>

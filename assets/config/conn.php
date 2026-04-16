@@ -1,21 +1,33 @@
 <?php
-    // ! MySQLi 
-    $conn = new mysqli($config['db']['db1']['host'], $config['db']['db1']['username'], $config['db']['db1']['password'], $config['db']['db1']['dbname']);        
-    
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+/**
+ * Database Connection
+ * 
+ * This file establishes a connection to the database using the 
+ * constants defined in config.php.
+ */
 
-    // ! PDO
-    try {
-        $conn = new PDO(
-            "mysql:host=" . $config[ 'db' ][ 'db1' ][ 'host' ] . ";dbname=" . $config[ 'db' ][ 'db1' ][ 'dbname' ] . ";charset=utf8mb4",
-            $config[ 'db' ][ 'db1' ][ 'username' ],
-            $config[ 'db' ][ 'db1' ][ 'password' ]
-        );
-        $conn->setAttribute( PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC );
-        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    } catch( PDOException $ex ) {
-        die( "Connection failed: " . $ex->getMessage() );
-    }
+// --- 1. MySQLi CONNECTION (Optional) ---
+$conn_mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);        
+
+if ($conn_mysqli->connect_error) {
+    // In production, you might want to log this instead of dying
+    error_log("MySQLi Connection failed: " . $conn_mysqli->connect_error);
+}
+
+// --- 2. PDO CONNECTION (Recommended) ---
+try {
+    $conn = new PDO(
+        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        DB_USER,
+        DB_PASS
+    );
+    
+    // Set error mode and default fetch mode
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
+} catch(PDOException $ex) {
+    // Handle connection error safely
+    die("Database connection failed. Please check your configuration.");
+}
 ?>
